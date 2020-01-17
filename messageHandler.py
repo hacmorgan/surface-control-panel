@@ -4,7 +4,7 @@ import os
 import time
 
 
-# Functions for GUI use
+# Return a list of strings, each a message
 def getListOfMessages():
     # Get the absolute location of this file
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -19,19 +19,13 @@ def getListOfMessages():
 
 
 # Handle incoming message from the webpage
-def decodeMessage(message):
+def addMessage(message):
     # Get the absolute location of this file
     dir_path = os.path.dirname(os.path.realpath(__file__))
     files = os.listdir(dir_path)
     with open(dir_path + '/messages.csv', 'a+') as msgfile:
         msg_writer = csv.writer(msgfile, delimiter=';')
         msg_writer.writerow([str(time.time()), message, 'unknown'])
-
-    #msg_list = getListOfMessages()
-    #print('Messages received:')
-    #print(msg_list)
-    #print('Message to be added:')
-    #print(message)
 
     
 # If this file is directly called:

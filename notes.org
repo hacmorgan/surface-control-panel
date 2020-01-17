@@ -2,9 +2,18 @@
 ** DONE finish getListOfMessages() 
 ** DONE Get decodeMessage() to add to messages.csv
 ** DONE Get index.html to print the message list
+** TODO Make genIndex() read files
+** TODO Add a message by using a text field
 ** TODO Make it a bit prettier
 *** TODO Print messages in a table
 
+* Required functionality
+** Lighting control
+- On/off for each smart plug
+** Messages
+- Send a new message
+- Delete a message
+- Delete all messages
 
 * Notes
 - messages.csv will use a semicolon as a delimiter, this means that in the webpage, the message will need to be checked to see if it contains semicolons

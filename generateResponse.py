@@ -1,10 +1,13 @@
 #!/bin/python3
 
-# Imports
+# Official library imports
 import os
+from threading import Thread
+
+# Imports from other files
 from messageHandler import *
 import gmusic.gmusic
-from threading import Thread
+import smartDevices
 
 
 # This script generates index.html and returns it as a string of bytes
@@ -18,6 +21,13 @@ css_head = (b'HTTP/1.1 200 OK\r\n'
 
 extension_list = ['html', 'ico', 'css']
 
+
+# Store states of smart devices. When this script is initialised this should be updated
+
+smart_device_states = {
+    bedside_light : False,
+    sound_system : False
+}
 
 
 
@@ -35,17 +45,23 @@ def handleRequest(requested_file):
     # Music control page
     elif requested_file == 'music.html':
         response = html_head + genMusic()
+
+    # Smart device control
+    elif requested_file[0:4] == 'SDC_':
+        smartDevices.smartDeviceControl(requested_file[4:len(requested_file)])
+        response = html_head + genIndex()
     
     # Receiving a message
     elif requested_file[0:4] == 'MES_':
         addMessage(requested_file[4:len(requested_file)])
         response = html_head + genMessages()
 
+    # Music control (just reverse playlist for now)
     elif requested_file[0:4] == 'MUS_':
         decodeMusic(requested_file[4:len(requested_file)])
         response = html_head + genMusic()
         
-    # any files in the html folder
+    # Other files (e.g. stylesheets) are in the html folder
     elif requested_file in os.listdir('html'):
         # Check the file extension
         dot_pos = requested_file.rfind('.')
@@ -54,7 +70,7 @@ def handleRequest(requested_file):
         # .html, .ico
         if extension in extension_list[0:2]:
             response = html_head
-            # .css
+        # .css
         elif extension == extension_list[2]:
             response = css_head
         # Send 404 if file extension not in list
@@ -124,4 +140,10 @@ def decodeMusic(message):
         # Run the gmusic script in another thread
         thread = Thread(target=gmusic.gmusic.reverseplaylist, args = ('',True,))
         thread.start()
+
+
+# This function returns True if the device will now be switched on
+def smartDeviceControl(message):
+    if message == 'light':
+       
         

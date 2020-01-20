@@ -6,6 +6,8 @@
 ** TODO Add a message by using a text field
 ** TODO Make it a bit prettier
 *** TODO Print messages in a table
+*** TODO Make the generated main page accurate to the states of the smart devices
+This can be achieved by storing a dictionary with device names and states, which genIndex can read from
 
 * Required functionality
 ** Lighting control

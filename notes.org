@@ -2,7 +2,7 @@
 ** DONE finish getListOfMessages() 
 ** DONE Get decodeMessage() to add to messages.csv
 ** DONE Get index.html to print the message list
-** TODO Make genIndex() read files
+** DONE Make genIndex() read files
 ** TODO Add a message by using a text field
 ** TODO Make it a bit prettier
 *** TODO Print messages in a table
@@ -10,6 +10,9 @@
 * Required functionality
 ** Lighting control
 - On/off for each smart plug
+[[https://github.com/GadgetReactor/pyHS100][*Use Python pyHS100 package*]] pip install pyhs100, link is to github repo
+
+
 ** Messages
 - Send a new message
 - Delete a message

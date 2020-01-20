@@ -33,7 +33,7 @@ while True:
         requested_file = data[data.find('GET')+5:data.find('HTTP')-1]
         print (requested_file)
         
-        # Determine the appropriate response to send
+        # Handle the request 
         response = handleRequest(requested_file)
 
         # Send the response

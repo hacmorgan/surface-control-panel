@@ -3,7 +3,7 @@
 # Imports
 import os
 from messageHandler import *
-import gmusic
+import gmusic.gmusic
 from threading import Thread
 
 
@@ -122,6 +122,6 @@ def convertToBinary(file):
 def decodeMusic(message):
     if message == 'revplaylist':
         # Run the gmusic script in another thread
-        thread = Thread(target=gmusic.reverseplaylist, args = ('',True,))
+        thread = Thread(target=gmusic.gmusic.reverseplaylist, args = ('',True,))
         thread.start()
         

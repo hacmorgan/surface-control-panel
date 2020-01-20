@@ -1,0 +1,3 @@
+[submodule "gmusic"]
+	path = gmusic
+	url = git@github.com:hacmorgan/gmusic

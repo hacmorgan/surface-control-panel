@@ -22,13 +22,6 @@ css_head = (b'HTTP/1.1 200 OK\r\n'
 extension_list = ['html', 'ico', 'css']
 
 
-# Store states of smart devices. When this script is initialised this should be updated
-
-smart_device_states = {
-    bedside_light : False,
-    sound_system : False
-}
-
 
 
 # what to do with the requested file
@@ -48,7 +41,7 @@ def handleRequest(requested_file):
 
     # Smart device control
     elif requested_file[0:4] == 'SDC_':
-        smartDevices.smartDeviceControl(requested_file[4:len(requested_file)])
+        smartDeviceControl(requested_file[4:len(requested_file)])
         response = html_head + genIndex()
     
     # Receiving a message
@@ -97,7 +90,7 @@ def handleRequest(requested_file):
 # Generate the index page
 def genIndex():
     html = ( convertToBinary('html/head.html') +
-             convertToBinary('html/index-body.html') +
+             smartDevices.genIndexBody() +
              convertToBinary('html/tail.html') )
     return html
 

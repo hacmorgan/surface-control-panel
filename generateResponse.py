@@ -18,8 +18,11 @@ html_head = (b'HTTP/1.1 200 OK\r\n'
 css_head = (b'HTTP/1.1 200 OK\r\n'
                  b'Content-Type: text/css;\r\n'
                  b'\r\n')
+png_head = (b'HTTP/1.1 200 OK\r\n'
+                 b'Content-Type: image/png;\r\n'
+                 b'\r\n')
 
-extension_list = ['html', 'ico', 'css']
+extension_list = ['html', 'ico']
 
 
 
@@ -41,7 +44,7 @@ def handleRequest(requested_file):
 
     # Smart device control
     elif requested_file[0:4] == 'SDC_':
-        smartDeviceControl(requested_file[4:len(requested_file)])
+        smartDevices.smartDeviceControl(requested_file[4:len(requested_file)])
         response = html_head + genIndex()
     
     # Receiving a message
@@ -64,8 +67,10 @@ def handleRequest(requested_file):
         if extension in extension_list[0:2]:
             response = html_head
         # .css
-        elif extension == extension_list[2]:
+        elif extension == 'css':
             response = css_head
+        elif extension == 'png':
+            response = png_head
         # Send 404 if file extension not in list
         else:
             requested_file = '404.html'
@@ -135,8 +140,4 @@ def decodeMusic(message):
         thread.start()
 
 
-# This function returns True if the device will now be switched on
-def smartDeviceControl(message):
-    if message == 'light':
-       
         

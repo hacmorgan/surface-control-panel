@@ -27,3 +27,8 @@ li a:hover {
 .active {
   background-color:#4CAF50;
 }
+
+* {
+ /* font-size: 100%; */
+ font-family: Helvetica;
+}
